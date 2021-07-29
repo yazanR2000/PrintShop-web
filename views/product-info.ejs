@@ -1,0 +1,123 @@
+<%- include('partials/header') %>
+
+
+    <div class="wrapper">
+        <%- include('partials/sidebar') %>
+            <div id="content">
+                <%-include('partials/nav')%>
+
+                    <div class="bg-danger note">
+                        <p style="color: white;"><i class="fas fa-exclamation"></i> <span>NOTE</span> : Please check
+                            your size carefully cuz there is no back.</p>
+                        <p style="direction: rtl;color: white;"><i class="fas fa-exclamation"></i> <span>ملاحظة</span> :
+                            رجاءا تفحص الحجم جيدا لانه لا يمكن الترجيع.</p>
+                    </div>
+                    <div class="product row mb-5">
+                        <%-include('product-carousel/carousel')%>
+                            <div class="pro__p col-xs-12 col-md-6  p-3" style="border-radius: 10px;">
+
+                                <input type="hidden" value="/product/<%=type%>/<%=topic%>/<%=id%>" class="path">
+
+                                <h3 class="product-name">Attack on titan</h3>
+                                <div class="color">
+                                    <p style="display: inline-block; margin-right: 20px;">Colors :</p>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <%for(var i=0;i < product.length ; i++){%>
+                                            <label class="btn btn-sm btn-light mr-1 pro-color">
+                                                <input type="radio" class="color" value="<%=product[i].color%> <%=i%>"
+                                                    id="option<%=i+1%>">
+                                                <%=product[i].color%>
+                                            </label>
+                                            <%}%>
+                                    </div>
+                                </div>
+                                <div class="size">
+                                    <p style="display: inline-block; margin-right: 20px;">Size :</p>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <%for(var i=0;i < sizes.length ; i++){%>
+                                            <label class="btn btn-light mr-1 pro-size">
+                                                <input type="radio" class="size" name="size" value="<%=sizes[i]%>"
+                                                    id="option<%=i+1%>">
+                                                <%=sizes[i]%>
+                                            </label>
+                                            <%}%>
+                                                &nbsp;
+                                                <a href="#"
+                                                    onclick='window.open("http://localhost:3000/sizes/guide");return false;'
+                                                    style="color: rgb(147, 147, 223); font-size: x-small; margin-top: 15px;margin-left: 15px;">Size
+                                                    help</a>
+                                    </div>
+                                </div>
+                                <h4 class="price" name="price" value="<%=price%>">$
+                                    <%=price%>
+                                </h4>
+                                <div class="add mt-3 form-group row ml-0 mr-0">
+
+                                    <p class="mt-2" style="width: 30%">Quantity : </p>
+                                    <div class="qty__pro">
+                                        <a class="minus btn  btn-sm">-</a>
+                                        <input class="w-100  count" style="text-align: center;" type="number"
+                                            name="quantity" value=1 min="1" max="99" disabled=true>
+                                        <a class="plus btn btn-sm">+</a>
+                                    </div>
+                                    <!--<div class="btn-group mx-auto" role="group" aria-label="Second group"
+                                    style="width: 70%;">
+                                    
+                                    <button style="border-top-left-radius: 15px; border-bottom-left-radius: 15px;"
+                                        class="minus btn btn-light btn-sm">-</button>
+                                    <input type="number" name="quantity" value=1 class="btn btn-light btn-sm count"
+                                        min="1" max="99">
+                                    <button style="border-top-right-radius: 15px; border-bottom-right-radius: 15px;"
+                                        class="plus btn btn-light btn-sm">+</button>
+                                </div>-->
+                                </div>
+                                <hr style="height: 1px;">
+                                <div class="total mt-1">
+                                    <div>
+                                        <span style="display: inline-block;">total :</span>
+                                        <span class="total-price">$<%=price%></span>
+                                    </div>
+                                    <div class="add-fav mt-4" style="width: 100%;">
+                                        <button class="btn btn-outline-dark add-to-cart w-100 " data-login=<%=login%>
+                                            data-from="info"><i
+                                            class="fas fa-shopping-cart"></i> Add to
+                                            cart</button>
+                                            <a class="add-to-fav bg-light"><i class="fas fa-heart "></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="you-may-like mt-5">
+                                    <div class="title bg-light" style="text-align: left;">
+                                        <h5 class="ml-2">
+                                            You may like <i class="fas fa-heart"></i>
+                                        </h5>
+                                    </div>
+                                    
+                                    <div class="all products mt-4 row" >
+                                        <%like.forEach(function(image){%>
+                                            <div class="col-sm-6 col-xs-6 col-md-4 col-lg-3 mb-3">
+                                                    <div class="item bg-light">
+                                                        <div class="card">
+                                                            <a  href="/product/<%=type%>/<%=topic%>/<%=image.id%>"><img class="card-img-top owl-lazy" src="data:image.colors[0]/<%=image.colors[0].img.contentType%>;base64,<%=image.colors[0].img.data.toString('base64')%>" alt=""></a>
+                                                        </div>
+                                                        <p style="margin: 0;padding: 0;">Woo single</p>
+                                                        <hr style="margin: 2px 50px;">
+                                                        <h5 >$<%=image.price%></h5>
+                                                        <button class="btn btn-outline-dark btn-sm add-to-cart" data-login="<%=login%>" data-from="/<%=type%>/<%=topic%>" data-path="<%=type%>/<%=topic%>/<%=image.id%>" data-color="<%=image.colors[0].color%>" data-size="<%=image.sizes[0]%>" data-price="<%=image.price%>"><i class="fas fa-shopping-cart"></i> Add to cart</button>
+                                                    </div>
+                                            </div>
+                                        <%})%>
+                                    </div>
+                                
+                            </div>
+                            
+                    </div>
+
+                    <div class="deleted-item" style="text-align: center;">
+                    </div>
+                    <%-include('footer/footer')%>
+            </div>
+            <%-include('login')%>
+    </div>
+
+    <%-include('partials/footer') %>

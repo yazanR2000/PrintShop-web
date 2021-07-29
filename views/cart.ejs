@@ -1,0 +1,67 @@
+<%-include('partials/header') %>
+
+
+    <div class="wrapper">
+        <%- include('partials/sidebar') %>
+            <div id="content">
+                <%-include('partials/nav')%>
+                    <div class="bg-danger note">
+                        <p style="color: white;"><i class="fas fa-exclamation"></i> <span>NOTE</span> : Please check
+                            your size carefully cuz there is no back.</p>
+                        <p style="direction: rtl;color: white;"><i class="fas fa-exclamation"></i> <span>ملاحظة</span> :
+                            رجاءا تفحص الحجم جيدا لانه لا يمكن الترجيع.</p>
+                    </div>
+                    <div class="row" style="margin-left: 0;margin-right: 0;">
+                        <div id="stages-panel" class="carousel slide STAGES col-12 row" data-touch="false" data-interval="false">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active col-3">
+                                    CART
+                                </div>
+                                <div class="carousel-item col-3">
+                                    DELIVERY
+                                </div>
+                                <div class="carousel-item col-3">
+                                    PAYMENT
+                                </div>
+                                <div class="carousel-item col-3">
+                                    RECEIPT
+                                </div>
+                            </div>
+                        </div>
+                        <div id="stages" class="carousel slide col-12" data-touch="false" data-interval="false">
+                            <div class="carousel-inner"></div>
+                            <div class="carousel-item stage-1 active">
+                                
+                                <%-include('cart/stages/stage-1/cart-content')%>
+                            </div>
+                            <div class="carousel-item stage-2">
+                                <%-include('cart/stages/stage-2/delivery')%>
+                            </div>
+                            <div class="carousel-item stage-3">
+                                <%-include('cart/stages/stage-3/payment')%>
+                            </div>
+                            <div class="carousel-item stage-4">
+                                <%-include('cart/stages/stage-4/reseipt')%>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <%-include('footer/footer')%>
+                    </div>
+                    
+            </div>
+
+
+    </div>
+    <div class="deleted-item" style="text-align: center;">
+
+    </div>
+
+
+    </div>
+    <div id="loaderP">
+        <div class="loader"></div>
+    </div>
+
+    <%-include('cart/cart')%>
+    <%-include('partials/footer')%>

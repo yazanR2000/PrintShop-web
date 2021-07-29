@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<div class="wrapper">
+    <!--sidebar-->
+    <%- include('partials/sidebar') %>
+
+    <div id="content">
+         <!--nav-->
+        <%-include('partials/nav')%>
+
+        <div class="all products row" >
+            <%item.products.forEach(function(image){%>
+                <div class="col-sm-6 col-xs-6 col-md-4 col-lg-3 mb-3">
+                        <div class="item bg-light">
+                            <div class="card">
+                                <a  href="/product/<%=type%>/<%=topic%>/<%=image.id%>"><img class="card-img-top owl-lazy" src="data:image.colors[0]/<%=image.colors[0].img.contentType%>;base64,<%=image.colors[0].img.data.toString('base64')%>" alt=""></a>
+                            </div>
+                            <p style="margin: 0;padding: 0;">Woo single</p>
+                            <hr style="margin: 2px 50px;">
+                            <h5 >$<%=image.price%></h5>
+                            <button class="btn btn-outline-dark btn-sm add-to-cart" data-login="<%=login%>" data-from="/<%=item.title%>/<%=item.topic%>" data-path="<%=item.title%>/<%=item.topic%>/<%=image.id%>" data-color="<%=image.colors[0].color%>" data-size="<%=image.sizes[0]%>" data-price="<%=image.price%>"><i class="fas fa-shopping-cart"></i> Add to cart</button>
+                        </div>
+                </div>
+            <%})%>
+        </div>
+        <div class="deleted-item" style="text-align: center;">
+                        
+        </div>
+        <%-include('footer/footer')%>
+    </div>
+    <%-include('login')%>
+</div>
+
+
+
+
+<%-include('partials/footer')%>

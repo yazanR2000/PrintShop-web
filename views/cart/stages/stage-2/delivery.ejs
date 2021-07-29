@@ -1,0 +1,56 @@
+<div id="stage-2">
+    <h3>Shipping information</h3>
+    <div style="color: rgb(85, 84, 84);padding: 10px;">
+        Please enter a valid phone number we will contact with you with it.<br>
+        رجاءا ادخل رقم هاتف فعال سيتم التواصل معك عن طريقه.  
+    </div>
+    <hr style="height: 1px;">
+        <div class="form row">
+            <div id="fname" class="col-lg-6 col-md-6 col-sm-12">
+                
+                <p>Fisrt name :</p>
+                <input class="bg-light" type="text" style="width: 100%;padding: 10px;border:none" name='fname'
+                    maxlength="10" placeholder="First name" value="<%=fname%>" required>
+                    <p class="fname">Enter at least 4 character</p>
+            </div>
+
+            <div id="lname" class="col-lg-6 col-md-6">
+                
+                <p>Last name :</p>
+                <input class="bg-light" type="text" style="width: 100%;padding: 10px;border:none" name='lname'
+                    maxlength="10" placeholder="Last name" value="<%=lname%>" required>
+                    <p class="lname">Enter at least 4 character</p>
+            </div>
+
+            <div id="ph" class="col-lg-6 col-md-6">
+                
+                <p>Phone number :</p>
+                <input class="bg-light" type="text" name="phone-number"  maxlength="18"
+                    style="width: 100%;padding: 10px;border:none" placeholder="Phone number" value="<%=pnumber%>" required>
+                    <p class="ph">Enter a valid jordanian phone number</p>
+            </div>
+
+            <div id="city" class="col-lg-6 col-md-6">
+                
+                <p>City :</p>
+                <input class="bg-light" type="text" name="city" style="width: 100%;padding: 10px;border:none" placeholder="City"
+                    required>
+                    <p class="city">Please enter your city</p>
+            </div>
+
+            
+        </div>
+        <div class="options row">
+            <div class="col-md-6 col-lg-6 col-sm-12">
+                <a  href="#stages" data-slide="prev" class="back-to-cart btn btn-outline-dark">
+                    BACK TO CART
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-12">
+                <a class="proceed-to-payment btn btn-dark">
+                    PROCEED TO CHECKOUT
+                </a>
+            </div>
+        </div>
+
+</div>

@@ -1,0 +1,51 @@
+<%- include('partials/header') %>
+
+  <div class="wrapper">
+    <%- include('partials/sidebar') %>
+      <div id="content">
+        <%-include('partials/nav')%>
+          <div class="bg-danger note">
+            <p style="color: white;"><i class="fas fa-exclamation"></i> <span>NOTE</span> : Please check
+              your size carefully cuz there is no back.</p>
+            <p style="direction: rtl;color: white;"><i class="fas fa-exclamation"></i> <span>ملاحظة</span> :
+              رجاءا تفحص الحجم جيدا لانه لا يمكن الترجيع.</p>
+          </div>
+          <div class="guide p-5">
+            <h3>T-shirts</h3>
+            <table class="table ">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Hand length (cm)</th>
+                  <th scope="col">Shirt length (cm)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">S</th>
+                  <td>23</td>
+                  <td>69</td>
+                </tr>
+                <tr>
+                  <th scope="row">M</th>
+                  <td>24</td>
+                  <td>72</td>
+                </tr>
+                <tr>
+                  <th scope="row">L</th>
+                  <td>25</td>
+                  <td>76</td>
+                </tr>
+                <tr>
+                  <th scope="row">XL</th>
+                  <td>26</td>
+                  <td>78</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+      </div>
+
+  </div>
+  <%- include('partials/footer') %>

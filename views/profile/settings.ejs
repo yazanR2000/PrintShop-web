@@ -1,0 +1,124 @@
+<%- include('../partials/header') %>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <%- include('../partials/sidebar') %>
+            <!-- Page Content  -->
+            <div id="content">
+                <!--nav-->
+                <%-include('../partials/nav')%>
+
+                    <div class="p-4 bg-light">
+                        <div class="mb-1"
+                            style="display: inline-block;height: 10px;width: 20px;background: rgb(115, 115, 207);border-radius: 20px;">
+                        </div>
+                        <h4 class="ml-2 settings-title" style="display: inline-block;">Profile</h4>
+                        <form id="profile-form" enctype="multipart/form-data">
+
+                            <div class="p-5 ml-0 mr-0" style="background-color: white;">
+                                <span class="invalid-fn">*Please enter your first name.</span>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                                    <input type="text" name="First" class="form-control" value="<%=fname%>"
+                                        placeholder="First name" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                                <span class="invalid-ln">*Please enter your last name.</span>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fas fa-user-friends"></i></span>
+                                    <input type="text" name="Last" class="form-control" value="<%=lname%>"
+                                        placeholder="Last name" aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                                <span class="invalid-email">*Please enter your email.</span>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"><i
+                                            class="fas fa-envelope"></i></span>
+                                    <input type="email" name="email" class="form-control" value="<%=email%>" placeholder="E-mail"
+                                        aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"><input style="display: none;"
+                                            type="text" name="phone" id="phone"></span>
+                                    <input type="text" name="phone-number" id="phone-number" class="form-control"
+                                        value="<%=phone%>" aria-label="Username" aria-describedby="basic-addon1">
+                                        
+                                </div>
+                                <span class="invalid-number">*Please enter a valid number for the choosen country.</span>
+                                <div class="pl-5 pr-5 mt-5">
+                                    <input  id="save" class="btn btn-block btn-dark" value="SAVE">
+                                </div>
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+
+
+
+                    <%-include('../footer/footer')%>
+            </div>
+            <div class="deleted-item" style="text-align: center;">
+
+            </div>
+    </div>
+
+    <div id="loaderP">
+        <div class="loader"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.js"
+        integrity="sha512-lib7WdJvAnfLLBi5AHdN+wUkcWwpu1fmYzyEHQijZq7WedcwBiwdVNbcML2rAtKvwtOIU7thMGB+O9Kpb9g2Cw=="
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        var input = document.querySelector("#phone");
+
+        var iti = window.intlTelInput(input, {
+            // allowDropdown: false,
+            autoHideDialCode: false,
+            //autoPlaceholder: "off",
+            // dropdownContainer: document.body,
+            // excludeCountries: ["us"],
+            // formatOnDisplay: false,
+            geoIpLookup: function (callback) {
+                $.get('https://ipinfo.io', function () { }, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "jo";
+                    callback(countryCode);
+                });
+            },
+            // hiddenInput: "full_number",
+            initialCountry: "auto",
+            // localizedCountries: { 'de': 'Deutschland' },
+            // nationalMode: false,
+            //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+            // placeholderNumberType: "MOBILE",
+             preferredCountries: ['jo','dz','bh','kw','lb'],
+            separateDialCode: true,
+            utilsScript:'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js'
+        });
+        input.addEventListener("countrychange", function () {
+            var p = this.getAttribute('placeholder');
+            $('#phone-number').attr('placeholder', p);
+        });
+        $('#phone-number').on('input', function () {
+            $('#phone').val($('#phone-number').val());
+            
+            var telInput = $('#phone');
+            if ($.trim(telInput.val())) {
+                if (iti.isValidNumber()) {
+                    $('.invalid-number').css('display','none');
+                    $('#save').prop('disabled',false);
+                }
+                else {  
+                    $('.invalid-number').css('display','block');
+                    $('#save').prop('disabled',true);
+                    
+                }
+            }
+        });
+
+    </script>
+
+
+    <%- include('../partials/footer') %>

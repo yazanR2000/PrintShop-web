@@ -1,0 +1,77 @@
+<div class="col-sm-12 cart-items">
+    <table class="head" style="width: 100%;">
+        <tr class="bordered">
+            <th>
+                <p>PRODUCTS</p>
+            </th>
+            <th class="SIZE">
+                <p>SIZE</p>
+            </th>
+            <th class="COLOR">
+                <p>COLOR</p>
+            </th>
+            <th class="QTY">
+                <p>QTY</p>
+            </th>
+            <th class="PRICE">
+                <p>PRICE</p>
+            </th>
+            <th class="DELETE"></th>
+        </tr>
+        <% cart.forEach(function(product){%>
+            <input class="pro-qty" type="hidden" name="qty-<%=product.id%>" value="<%=product.quantity%>">
+            <tr class="bordered" id="<%=product._id%>">
+                <td>
+                    <div class="product-img" style="width: fit-content;">
+                        <a href="/product/<%=product.path%>"><img
+                                style="height:100px;width: 100px;border-radius: 5px;"
+                                src="data:product.image/<%=product.image.contentType%>;base64,<%=product.image.data.toString('base64')%>"
+                                alt=""></a>
+                    </div>
+                    <div class="product-info">
+                        <p
+                            style="word-spacing: 0.01em; font-size: 0.9rem; color: black; margin: 0;">
+                            Attack on titan</p>
+                            <p class="show-xs" style="font-size: x-small;">size : <span><%=product.size%></span></p>
+                            <p class="show-xs" style="font-size: x-small;">color : <span><%=product.color%></span></p>
+                    </div>
+                </td>
+                <td class="pro-SIZE">
+                    <%=product.size%>
+                </td>
+                <td class="pro-COLOR">
+                    <%=product.color%>
+                </td>
+                <td class="QTY">
+                    <div class="row">
+                        <div class="btn-group mx-auto" role="group" aria-label="Second group">
+                            <button style="border-top-left-radius: 15px; border-bottom-left-radius: 15px;" item-id="<%=product._id%>" type="button" class="min btn btn-light btn-sm">-</button>
+                            <button name="<%=product._id%>" value="<%=product.quantity%>" type="button" class="btn btn-light btn-sm qty-<%=product._id%> iqty"><%=product.quantity%></button>
+                            <button style="border-top-right-radius: 15px; border-bottom-right-radius: 15px;" item-id="<%=product._id%>" type="button" class="max btn btn-light btn-sm">+</button>
+                        </div>
+                        <!--<a class="min btn btn-lg" role="button"
+                            item-id="<%=product._id%>">-</a>
+                        <strong name="<%=product._id%>" value="<%=product.quantity%>" style="margin:auto" class="qty-<%=product._id%> iqty">
+                            <%=product.quantity%>
+                        </strong>
+                        <a class=" max btn btn-lg" role="button" 
+                            item-id="<%=product._id%>">+</a>-->
+                    </div>
+
+                </td>
+                <td>
+                    <div style="text-align: center;" class="mx-auto">
+                        <span style="transition: 0.2s all ease-in-out;"
+                            class="price-<%=product._id%>" pro-price="<%=product.price%>">
+                            <%=product.price * product.quantity%>$</span>
+                    </div>
+                </td>
+                <td>
+                    <a class="delete" role="button" item-id="<%=product._id%>"><i
+                        class="fa fa-times"></i></a>
+                </td>
+            </tr>
+            <%})%>
+            
+    </table>
+</div>

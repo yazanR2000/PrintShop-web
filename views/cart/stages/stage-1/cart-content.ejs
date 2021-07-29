@@ -1,0 +1,59 @@
+<div class="accept mt-5">
+
+    <div class="cart-form row">
+
+        <%-include('cart-products')%>
+
+            <div class="col-sm-12 stages">
+
+                <div class="Promo-codeAndTotal mt-4  row">
+                    <div class="Promo-code col-6">
+                        <button class="btn btn-outline-dark Promo-code">
+                            Promo code <i class="fas fa-angle-right ml-5"></i></button>
+                    </div>
+
+                    <div class="Total col-6">
+                        TOTAL PRICE <span class="CART-TOTAL price">
+                            <%=total%>$
+                        </span>
+                    </div>
+                </div>
+                <div class="back-home proceed options mt-4 row">
+                    <div class="continue-shopping col-md-6 col-lg-6 col-sm-12">
+                        <a href="/" class="btn btn-outline-dark"
+                            > CONTINUE SHOPPING</a>
+                    </div>
+                    <div class="continue-shopping col-md-6 col-lg-6 col-sm-12">
+                        
+                        <a href="#stages" role="button" data-slide="next" class="btn btn-dark"
+                            > PROCEED TO CHECKOUT</a>
+                    </div>
+                </div>
+
+                <!--<hr style="margin: 50px 50px 0 50px;height: 2px;background-color: black;">
+                <div style="margin-top: 50px;text-align: center;">
+                    <p
+                        style="margin : 0;font-size: small;font-weight: bold; color: rgb(46, 41, 41);word-spacing: 0.001em;">
+                        cart total : <strong class="PRICE-SIGN" style="color: black; font-size: larger;"> $<strong
+                                class="CART-TOTAL" cart-total-price="<%=total%>">
+                                <%=total%>
+                            </strong></strong></p>
+                    <p style="font-size: small;color: rgb(46, 41, 41);word-spacing: 0.001em;">Shipping & taxes
+                        calculated at checkout</p>
+                    <div class="form-check">
+                        <input name="terms-conditions" style="width:15px;height:15px" type="checkbox"
+                            class="form-check-input" id="terms-conditions">
+                        <label class="form-check-label" for="terms&contions">
+                            <span style="font-size: x-small;">I accept for <a style="color: blueviolet;"
+                                    href=""><i>terms &
+                                        conditions</i></a></span>
+                        </label>
+                    </div>
+                    <div class=" row mt-5" style="padding: 0 70px;">
+                        <a class="btn btn-dark mb-2 col-12 checkout">C H E C K O U T<i
+                                class="fas fa-shopping-cart ml-3"></i></a>
+                    </div>
+                </div>-->
+            </div>
+    </div>
+</div>

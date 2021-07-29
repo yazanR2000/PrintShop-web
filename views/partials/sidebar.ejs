@@ -1,0 +1,86 @@
+<nav id="sidebar" class="bg-dark">
+    <div class="sidebar-header bg-dark">
+        <h3 style="font-family: 'Leckerli One', cursive;">Printholic.jo</h3>
+        <strong>PA</strong>
+    </div>
+    <ul class="list-unstyled components">
+        <li>
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li>
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <i class="fas fa-tshirt"></i>
+                Clothes
+            </a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+
+                <li>
+                    <a href="/Hoodies And T-shirts/series">Series</a>
+                </li>
+                <li>
+
+                    <a href="/Hoodies And T-shirts/anime"><i class="fas fa-paw"></i> Anime</a>
+                </li>
+                <li>
+                    <a href="/Hoodies And T-shirts/games"><i class="fas fa-gamepad"></i> Games</a>
+                </li>
+                <li>
+                    <a href="/Hoodies And T-shirts/all">All</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#Frames" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <i class="fas fa-crop-alt"></i>
+                Frames
+            </a>
+            <ul class="collapse list-unstyled" id="Frames">
+
+                <li>
+                    <a href="/Hoodies&t-shirts">Series</a>
+                </li>
+                <li>
+
+                    <a href="/Hoodies&t-shirts"><i class="fas fa-paw"></i> Anime</a>
+                </li>
+                <li>
+                    <a href="/Hoodies&t-shirts"><i class="fas fa-gamepad"></i> Games</a>
+                </li>
+                <li>
+                    <a href="/Hoodies&t-shirts">All</a>
+                </li>
+            </ul>
+        </li>
+        <%if(login){%>
+            <li>
+                <a class="get-cart" href="/cart"><i class="fas fa-shopping-cart"></i> Cart</a>
+            </li>
+            <li>
+                <a href="#Profile" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-user-circle"></i>
+                    Profile
+                </a>
+                <ul class="collapse list-unstyled" id="Profile">
+    
+                    <li>
+                        <a href="/Hoodies&t-shirts"><i class="fas fa-shopping-cart"></i> Orders</a>
+                    </li>
+                    <li>
+                        <a href="/Hoodies&t-shirts"><i class="fas fa-star"></i> Rate store and orders</a>
+                    </li>
+                    <li>
+                        <a href="/profile/settings"><i class="fas fa-cog"></i> Settings</a>
+                    </li>
+                    <li>
+                        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a>
+                    </li>
+                </ul>
+            </li>
+        <%}else{%>
+            <li>
+                <a class="add-to-cart" data-login="<%=login%>"><i class="fas fa-sign-in-alt"></i>Log in</a>
+            </li>
+        <%}%>
+        
+    </ul>
+</nav>

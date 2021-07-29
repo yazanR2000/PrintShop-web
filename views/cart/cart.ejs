@@ -1,0 +1,272 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
+<script>
+    $('.delete').on('click', async function (event) {
+        var id = $(this).attr('item-id');
+        var total = parseInt($('.CART-TOTAL').html());
+        var qty = parseInt($('.qty-' + id).html());
+        event.preventDefault();
+        event.stopPropagation();
+
+        $('.waiting').addClass('show-waiting');
+        $('.waiting img').addClass('rotate');
+        $('#loaderP').css('display', 'block');
+        await $.ajax({
+            url: '/cart',
+            type: 'PATCH',
+            contentType: 'application/json',
+            data: JSON.stringify({ productId: id, cartTotal: total, qty: qty, type: 'delete' }),
+            success: async function (result) {
+                $('#loaderP').css('display', 'none');
+                if (result.done) {
+                    console.log(result);
+                    if (result.cart.length === 0) {
+                        $('.accept').css("dispaly", "none");
+                        $('.cart-empty').css("dispaly", "block");
+                    } else {
+                        $('.accept').css("dispaly", "block");
+                        $('.cart-empty').css("dispaly", "none");
+                    }
+                    $('#' + id).remove();
+                    $('.CART-TOTAL').html(result.total);
+
+
+                    $('.deleted-item').html('Item deleted successfully.');
+                    $('.deleted-item').addClass('deleted-item-show');
+                    setTimeout(function () {
+                        $('.deleted-item').removeClass('deleted-item-show');
+                        //$(".deleted-item").delay(1000).animate({ opacity: 1 }, 700);​
+                    }, 2500);
+                } else {
+                    $('.deleted-item').html('Somthing went wrong!');
+                    $('.deleted-item').css('background-color', 'red');
+                    $('.deleted-item').addClass('deleted-item-show');
+                    await setTimeout(function () {
+                        $('.deleted-item').removeClass('deleted-item-show');
+                        //$(".deleted-item").delay(1000).animate({ opacity: 1 }, 700);​
+                    }, 2500);
+                }
+
+
+            },
+            error: function (result) {
+                console.log(err);
+            }
+        })
+
+    });
+
+
+    $('.max').on('click', function () {
+        var id = $(this).attr('item-id');
+        console.log(id);
+        $('.qty-' + id).html(parseInt($('.qty-' + id).html()) + 1);
+        var qty = parseInt($('.qty-' + id).html());
+        $('input[name=qty-' + id + ']').val($('.qty-' + id).html().trim());
+
+        var price = parseInt($('.price-' + id).attr('pro-price'));
+
+        $('.price-' + id).html((qty * price) + '$');
+
+        var cartTotal = parseInt($('.CART-TOTAL').html());
+
+        $('.CART-TOTAL').html((cartTotal + price) + '$');
+
+        $('.CART-TOTAL').addClass('change-prices');
+
+        $('.price-' + id).addClass('change-prices');
+        setTimeout(
+            function () {
+                $('.price-' + id).removeClass('change-prices');
+                $('.CART-TOTAL').removeClass('change-prices');
+            }, 300);
+    });
+
+    $('.min').on('click', function () {
+        var id = $(this).attr('item-id');
+        $('.qty-' + id).html(parseInt($('.qty-' + id).html()) - 1);
+        $('input[name=qty-' + id + ']').val($('.qty-' + id).html().trim());
+
+        var cartTotal = parseInt($('.CART-TOTAL').html());
+
+        var initCart = parseInt($('.CART-TOTAL').attr('cart-total-price'));
+        var price = parseInt($('.price-' + id).attr('pro-price'));
+
+        if (parseInt($('.qty-' + id).html()) == 0) {
+            $('.qty-' + id).html("1");
+            $('input[name=qty-' + id + ']').val($('.qty-' + id).html().trim());
+        } else {
+            $('.CART-TOTAL').html(cartTotal - price + '$');
+        }
+        var qty = parseInt($('.qty-' + id).html());
+
+        $('.price-' + id).html((qty * price) + '$');
+
+
+        $('.CART-TOTAL').addClass('change-prices');
+
+        $('.price-' + id).addClass('change-prices');
+        setTimeout(
+            function () {
+                $('.price-' + id).removeClass('change-prices');
+                $('.CART-TOTAL').removeClass('change-prices');
+            }, 300);
+    });
+
+    $('.continue-shopping a').on('click', function () {
+        $('#stages-panel').carousel('next');
+    });
+    //stage-1
+    $('.proceed-to-checkout').on('click', function () {
+        $('#stages-panel').carousel('next');
+    });
+    $('.back-to-cart').on('click', function () {
+        $('#stages-panel').carousel('prev');
+    });
+    //stage-2
+    $('.proceed-to-payment').on('click', async function () {
+        $('.deleted-item').removeClass('deleted-item-show');
+
+        try {
+            var done = true;
+            var regex = /(?:(\+(962))[ -])?\(?((77|78|79)\d{0})\)?[ -]?(\d{3})[ -]?(\d{4})/g;
+            var fname = $('input[name="fname"]').val().trim();
+            var lname = $('input[name="lname"]').val().trim();
+            var ph = $('input[name="phone-number"]').val().toString();
+            console.log(ph);
+            var city = $('input[name="city"]').val().trim();
+            if (fname.length < 4) {
+                done = false;
+                $('.form .fname').addClass('invalid');
+            } else {
+                $('.form .fname').removeClass('invalid');
+            }
+            if (lname.length < 4) {
+                done = false;
+                $('.form .lname').addClass('invalid');
+            } else {
+                $('.form .lname').removeClass('invalid');
+            }
+            if (!regex.test(ph)) {
+                done = false;
+                $('.form .ph').addClass('invalid');
+            } else {
+                $('.form .ph').removeClass('invalid');
+            }
+            if (city.length <= 0) {
+                done = false;
+                $('.form .city').addClass('invalid');
+            } else {
+                $('.form p.city').removeClass('invalid');
+            }
+            if (done) {
+                console.log(done);
+                $('#stages').carousel('next');
+                $('#stages-panel').carousel('next');
+            } else {
+                console.log('yazan');
+            }
+        } catch (err) {
+            console.log('err');
+            throw err;
+        }
+
+    });
+    $('.proceed-to-order').on('click', async function (event) {
+        try {
+            var done = true;
+            console.log($('input[id="card"]').data('waschecked'));
+            if (!$('input[id="cash"]').data('waschecked') && !$('input[id="card"]').data('waschecked')) {
+                $('.deleted-item').html('Please pick a way to pay!');
+                $('.deleted-item').css('background-color', 'red');
+                $('.deleted-item').addClass('deleted-item-show');
+                await setTimeout(function () {
+                    $('.deleted-item').removeClass('deleted-item-show');
+                    //$(".deleted-item").delay(1000).animate({ opacity: 1 }, 700);​
+                }, 2500);
+            } else if ($('input[id="cash"]').data('waschecked')) {
+                event.preventDefault();
+                event.stopPropagation();
+                console.log('yazan');
+                try {
+                    $('#loaderP').css('display', 'block');
+                    var total = parseInt($('.CART-TOTAL').html());
+                    var qty = [];
+                    $('.pro-qty').each(function () {
+                        qty.push(parseInt($(this).val()));
+                    });
+                    console.log(qty);
+                    var infos = {
+                        cartTotal: total,
+                        qty: qty,
+                        type: 'order',
+                        fname: $('input[name="fname"]').val(),
+                        lname: $('input[name="lname"]').val(),
+                        ph: $('input[name="phone-number"]').val(),
+                        city: $('input[name="city"]').val()
+                    }
+                    await $.ajax({
+                        url: '/cart',
+                        type: 'PATCH',
+                        contentType: 'application/json',
+                        data: JSON.stringify(infos),
+                        success: async function (result) {
+                            setTimeout(function () {
+                                $('#loaderP').css('display', 'none');
+                            }, 1500);
+
+                            if (result.done) {
+                                $('#stages').carousel('next');
+                                $('#stages-panel').carousel('next');
+                                $('.deleted-item').html('Your order sent successfully!');
+                                $('.deleted-item').css('background-color', 'green');
+                                $('.deleted-item').addClass('deleted-item-show');
+                                await setTimeout(function () {
+                                    $('.deleted-item').removeClass('deleted-item-show');
+                                    //$(".deleted-item").delay(1000).animate({ opacity: 1 }, 700);​
+                                }, 2500);
+                            } else {
+                                $('.deleted-item').html('Something went wrong please try again!');
+                                $('.deleted-item').css('background-color', 'red');
+                                $('.deleted-item').addClass('deleted-item-show');
+                                await setTimeout(function () {
+                                    $('.deleted-item').removeClass('deleted-item-show');
+                                    //$(".deleted-item").delay(1000).animate({ opacity: 1 }, 700);​
+                                }, 2500);
+                            }
+                        },
+                    });
+                } catch (err) {
+                    console.log(err);
+                    throw err;
+                }
+            }
+
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    });
+    $('input[name="rad"]').click(function () {
+        var $radio = $(this);
+
+        // if this was previously checked
+        if ($radio.data('waschecked') == true) {
+            $radio.prop('checked', false);
+            $radio.data('waschecked', false);
+        }
+        else
+            $radio.data('waschecked', true);
+
+        // remove was checked from other radios
+        $radio.siblings('input[name="rad"]').data('waschecked', false);
+        var card = $('#card').data('waschecked');
+        if (card) {
+            $(".cardInfo").css('visibility', 'visible');
+        } else {
+            $(".cardInfo").css('visibility', 'hidden');
+        }
+    });
+</script>

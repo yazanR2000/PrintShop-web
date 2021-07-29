@@ -1,0 +1,102 @@
+<%- include('partials/header') %>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <%- include('partials/sidebar') %>
+            <!-- Page Content  -->
+            <div id="content">
+                <!--nav-->
+                <%-include('partials/nav')%>
+                    <div id="demo" class="carousel slide" data-ride="carousel">
+                        <ul class="carousel-indicators">
+                            <li data-target="#demo" data-slide-to="0" class="active"></li>
+                            <li data-target="#demo" data-slide-to="1"></li>
+                            <li data-target="#demo" data-slide-to="2"></li>
+                        </ul>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://previews.123rf.com/images/denira82/denira821904/denira82190400004/121585554-hoodies-and-sneakers-fashion-flat-lay-on-white-background-copy-space-top-view.jpg"
+                                    alt="Los Angeles">
+                                <div class="carousel-caption">
+                                    <h3>Los Angeles</h3>
+                                    <p>We had such a great time in LA!</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://static.sanvt.com/wp-content/uploads/2019/12/The-history-of-the-Hoodie-6-SANVT-Blog-1200x800-1024x683.jpeg"
+                                    alt="Chicago">
+                                <div class="carousel-caption">
+                                    <h3>Chicago</h3>
+                                    <p>Thank you, Chicago!</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://images.unsplash.com/photo-1484663548870-2aa675ba38fb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTZ8fGhvb2RpZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+                                    alt="New York">
+                                <div class="carousel-caption">
+                                    <h3>New York</h3>
+                                    <p>We love the Big Apple!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </a>
+                    </div>
+                    <section id="products">
+
+                        <%items.forEach(function(collection){%>
+                            <div class="container pr-0 pl-0 mt-5 mb-5">
+                                <div class="header mt-4">
+                                    <div class="collection-title" style="text-align: left;">
+                                        <h5 class="ml-2">
+                                            <%=collection.title%>
+                                        </h5>
+                                    </div>
+                                    <div class="show-all" style="text-align: right;">
+                                        <a class="btn btn-outline-dark btn-sm"
+                                            style="border-radius: 20px; font-size: smaller;">SHOW ALL</a>
+                                    </div>
+                                </div>
+                                <a class="customPrevBtn circule"><i class="fas fa-angle-left"></i></a>
+                                <a class="customNextBtn circule"><i class="fas fa-angle-right"></i></a>
+                                <div class="owl-carousel owl-theme">
+                                    <%collection.products.forEach(function(image){%>
+                                        <div class="item">
+                                            <div class="card">
+                                                <a
+                                                    href="/product/<%=collection.title%>/<%=collection.topic%>/<%=image.id%>"><img
+                                                        class="card-img-top owl-lazy"
+                                                        data-src="data:image.colors[0]/<%=image.colors[0].img.contentType%>;base64,<%=image.colors[0].img.data.toString('base64')%>"
+                                                        alt=""></a>
+                                            </div>
+                                            <p style="margin: 0;padding: 0;">Woo single</p>
+                                            <div class="item-footer">
+                                                <button class="btn btn-outline-dark btn-sm add-to-cart w-100"
+                                                    data-login="<%=login%>" data-from="/"
+                                                    data-path="<%=collection.title%>/<%=collection.topic%>/<%=image.id%>"
+                                                    data-color="<%=image.colors[0].color%>"
+                                                    data-size="<%=image.sizes[0]%>" data-price="<%=image.price%>"><i
+                                                        class="fas fa-shopping-cart"></i>Add to cart</button>
+                                                        <a class="btn btn-outline-danger"><i class="far fa-heart fav"></i></a>
+                                            </div>
+
+                                        </div>
+                                        <%})%>
+                                </div>
+                            </div>
+
+                            <%})%>
+                    </section>
+                    <div class="deleted-item" style="text-align: center;">
+
+                    </div>
+
+                    <%-include('footer/footer')%>
+            </div>
+            <%-include('login')%>
+    </div>
+    <%- include('partials/footer') %>
